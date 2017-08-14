@@ -35,6 +35,44 @@ describe('DB', function () {
       })
   })
 
+  it('可以根据不同的options，使用不同的endpoint', function (done) {
+    class AA extends DB {
+      constructor(options) {
+        super(options)
+        this.plugin('endpoint', function (options) {
+          if (options.type === 1) {
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                resolve({ retcode: 1, msg: 'logout' })
+              }, 0)
+            })
+          }
+        })
+        this.plugin('endpoint', function (options) {
+          if (options.type === 0) {
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                resolve({ retcode: 0, res: { msg: 'hello world' } })
+              }, 0)
+            })
+          }
+        })
+      }
+    }
+
+    const aa = new AA
+    // 如果 options.type === 1，则返回第一个答案
+    aa.request({ type: 1 })
+      .then(res => {
+        assert.equal(res.retcode, 1)
+        // 如果 options.type === 0，则返回第二个答案
+        return aa.request({ type: 0 })
+      }).then(res => {
+        assert.equal(res.retcode, 0)
+        done()
+      })
+  })
+
   it('可以设置options插件来处理options', function (done) {
     class YY extends DB {
       constructor(options) {
@@ -61,31 +99,31 @@ describe('DB', function () {
       }
     }
 
-    it('可以reject数据', function (done) {
-      class ZZ extends DB {
-        constructor(options) {
-          super(options)
-          this.plugin('endpoint', function () {
-            return new Promise((resolve, reject) => {
-              reject()
-            })
-          })
-        }
-      }
-
-      const zz = new ZZ
-
-      zz.request()
-        .then(() => {
-          throw new Error('should not trigger resolve callback')
-        }, () => {
-          done()
-        })
-    })
-
     const yy = new YY({ init: true })
     yy.request({ url: 'my://hello' })
       .then((res) => {
+        done()
+      })
+  })
+
+  it('可以reject数据', function (done) {
+    class ZZ extends DB {
+      constructor(options) {
+        super(options)
+        this.plugin('endpoint', function () {
+          return new Promise((resolve, reject) => {
+            reject()
+          })
+        })
+      }
+    }
+
+    const zz = new ZZ
+
+    zz.request()
+      .then(() => {
+        throw new Error('should not trigger resolve callback')
+      }, () => {
         done()
       })
   })
