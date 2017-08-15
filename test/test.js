@@ -19,13 +19,11 @@ describe('DB', function () {
 
         this.plugin('endpoint', function () {
           return new Promise((resolve,reject) => {
-            console.log("plugin")
-            /*
+            console.log("plugin")           
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
             }, 10)
-            */
-            resolve({ retcode: 0, res: { msg: 'hello world' } })
+
           })
         })
       }
@@ -37,7 +35,7 @@ describe('DB', function () {
       .then((res) => {
         assert.equal(res.res.msg, 'hello world')
         done()
-      }).catch(()=>{console.log("error")})
+      })
       
   })
 
@@ -85,17 +83,21 @@ describe('DB', function () {
         super(options)
         this.plugin('options', (options) => {
           // modify options
+          options.init = this.options.init
           options.flag = true
+          console.log("change: "+options)
           return options
         })
         this.plugin('endpoint', (options) => {
+          
           // init
           assert.equal(options.init, true)
           // merge
           assert.equal(options.url, 'my://hello')
           // options plugin modify
           assert.equal(options.flag, true)
-
+          
+          //console.log(options)
           return new Promise((resolve, reject) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
