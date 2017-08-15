@@ -83,9 +83,8 @@ describe('DB', function () {
         super(options)
         this.plugin('options', (options) => {
           // modify options
-          options.init = this.options.init
           options.flag = true
-          console.log("change: "+options)
+          //console.log("change: "+options)
           return options
         })
         this.plugin('endpoint', (options) => {
