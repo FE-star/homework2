@@ -1,6 +1,6 @@
 // Karma configuration
 // Generated on Fri Aug 11 2017 22:02:05 GMT+0800 (CST)
-
+var webpackConfig = require('./webpack.test.config');
 module.exports = function(config) {
   config.set({
 
@@ -47,7 +47,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -57,12 +57,19 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
+    // customLaunchers: {
+    //     ChromeNoSandbox: {
+    //         base: 'Chrome',
+    //         flags: ['--no-sandbox']
+    //     }
+    // },
 
-    webpack: {
-      resolve: {
-        extensions: ['.js']
-      }
-    },
+    webpack: webpackConfig,
+    // webpack : {
+    //   resolve: {
+    //     extensions: ['.js']
+    //   }
+    // },
 
     webpackMiddleware: {
       stats: 'errors-only'
@@ -71,7 +78,8 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: !!process.env.TRAVIS,
+    singleRun: true,
+    // singleRun: !!process.env.TRAVIS,
 
     // Concurrency level
     // how many browser should be started simultaneous
