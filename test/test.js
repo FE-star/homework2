@@ -18,21 +18,27 @@ describe('DB', function () {
         super(options)
 
         this.plugin('endpoint', function () {
-          return new Promise((resolve) => {
+          return new Promise((resolve,reject) => {
+            console.log("plugin")
+            /*
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
-            }, 0)
+            }, 10)
+            */
+            resolve({ retcode: 0, res: { msg: 'hello world' } })
           })
         })
       }
     }
 
     const xx = new XX()
+    
     xx.request()
       .then((res) => {
         assert.equal(res.res.msg, 'hello world')
         done()
-      })
+      }).catch(()=>{console.log("error")})
+      
   })
 
   it('可以根据不同的options，使用不同的endpoint', function (done) {
