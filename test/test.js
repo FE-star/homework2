@@ -162,6 +162,7 @@ describe('DB', function () {
         this.plugin('endpoint', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
+
               setTimeout(() => {
                 resolve({ retcode: 1, msg: 'logout' })
               }, 0)
@@ -171,6 +172,7 @@ describe('DB', function () {
         this.plugin('endpoint', function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
+              
               setTimeout(() => {
                 resolve({ retcode: 0, res: { msg: 'hello world' } })
               }, 0)
