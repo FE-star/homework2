@@ -64,12 +64,12 @@ module.exports = function(config) {
     //     }
     // },
 
-    webpack: webpackConfig,
-    // webpack : {
-    //   resolve: {
-    //     extensions: ['.js']
-    //   }
-    // },
+    // webpack: webpackConfig,
+    webpack : {
+      resolve: {
+        extensions: ['.js']
+      }
+    },
 
     webpackMiddleware: {
       stats: 'errors-only'
