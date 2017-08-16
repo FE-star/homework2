@@ -219,26 +219,4 @@ describe('DB', function () {
         done()
       })
   })
-  it('可以reject数据', function (done) {
-    console.log('case 4');
-    class ZZ extends DB {
-      constructor(options) {
-        super(options)
-        this.plugin('endpoint', function () {
-          return new Promise((resolve, reject) => {
-            reject()
-          })
-        })
-      }
-    }
-
-    const zz = new ZZ
-    console.log('create zz');
-    zz.request()
-      .then(() => {
-        throw new Error('should not trigger resolve callback')
-      }, () => {
-        done()
-      })
-  })
 })
