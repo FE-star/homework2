@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/FE-star/homework2#readme",
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "istanbul": "^0.4.5",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.2.0",
