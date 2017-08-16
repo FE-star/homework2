@@ -12,7 +12,7 @@ describe('DB', function () {
     assert.equal(db.options, options)
   })
 
-  /*it('可以设置endpoint插件，使得该请求用制定的方式处理', function (done) {
+  it('可以设置endpoint插件，使得该请求用制定的方式处理', function (done) {
     class XX extends DB {
       constructor(options) {
         super(options)
@@ -148,7 +148,7 @@ describe('DB', function () {
       .then((res) => {
         done()
       })
-  })*/
+  })
 
  
   it('可以通过judge插件判断返回是否正确', function (done) {
@@ -195,7 +195,7 @@ describe('DB', function () {
     })
    
 
-  /*it('可以reject数据', function (done) {
+  it('可以reject数据', function (done) {
     class ZZ extends DB {
       constructor(options) {
         super(options)
@@ -215,5 +215,5 @@ describe('DB', function () {
       }, () => {
         done()
       })
-  })*/
+  })
 })
