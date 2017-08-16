@@ -1,24 +1,28 @@
-let DB = require('../lib/db')
+let DB = require('../lib/db');
 // just for the real answer, please ignore
-if (!DB.prototype.request) {
+// console.log('typeof DB.prototype.request', typeof DB.prototype.request);
+if ( typeof DB.prototype.request != 'function') {
   DB = require('../lib/.db')
 }
 const assert = require('assert')
 
 describe('DB', function () {
   it('可以设置options', function () {
+    console.log('case 1');
     const options = {}
     const db = new DB(options)
     assert.equal(db.options, options)
   })
 
   it('可以设置endpoint插件，使得该请求用制定的方式处理', function (done) {
+    console.log('case2');
     class XX extends DB {
       constructor(options) {
         super(options)
 
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
+            console.log('xx Promise');
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
             }, 0)
@@ -28,8 +32,10 @@ describe('DB', function () {
     }
 
     const xx = new XX()
+    console.log('new xx')
     xx.request()
       .then((res) => {
+        console.log('xx resolve called:', res);
         assert.equal(res.res.msg, 'hello world')
         done()
       })
@@ -74,6 +80,7 @@ describe('DB', function () {
   })
 
   it('可以设置options插件来处理options', function (done) {
+    console.log('case 3');
     class YY extends DB {
       constructor(options) {
         super(options)
