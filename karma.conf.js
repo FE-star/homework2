@@ -40,6 +40,8 @@ module.exports = function(config) {
       dir: 'coverage/',
       reporters: [{
         type: 'lcov', subdir: 'lcov'
+      }, {
+        type: 'html', subdir: 'html'
       }]
     },
     // web server port
