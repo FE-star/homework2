@@ -4,7 +4,7 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --colors ./test/*.js",
+    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --colors ./test/*.js ./node_modules/tapable/lib/**.js",
     "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
