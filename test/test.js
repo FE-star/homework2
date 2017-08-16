@@ -18,21 +18,25 @@ describe('DB', function () {
         super(options)
 
         this.plugin('endpoint', function () {
-          return new Promise((resolve) => {
+          return new Promise((resolve,reject) => {
+            //console.log("plugin")           
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
-            }, 0)
+            }, 10)
+
           })
         })
       }
     }
 
     const xx = new XX()
+    
     xx.request()
       .then((res) => {
         assert.equal(res.res.msg, 'hello world')
         done()
       })
+      
   })
 
   it('可以根据不同的options，使用不同的endpoint', function (done) {
@@ -80,16 +84,19 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options
           options.flag = true
+          //console.log("change: "+options)
           return options
         })
         this.plugin('endpoint', (options) => {
+          
           // init
           assert.equal(options.init, true)
           // merge
           assert.equal(options.url, 'my://hello')
           // options plugin modify
           assert.equal(options.flag, true)
-
+          
+          //console.log(options)
           return new Promise((resolve, reject) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
@@ -155,6 +162,7 @@ describe('DB', function () {
         this.plugin('endpoint', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
+
               setTimeout(() => {
                 resolve({ retcode: 1, msg: 'logout' })
               }, 0)
@@ -164,6 +172,7 @@ describe('DB', function () {
         this.plugin('endpoint', function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
+              
               setTimeout(() => {
                 resolve({ retcode: 0, res: { msg: 'hello world' } })
               }, 0)
