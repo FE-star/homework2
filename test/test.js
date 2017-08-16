@@ -74,7 +74,6 @@ describe('DB', function () {
   })
 
 
-
   it('可以设置options插件来处理options', function (done) {
     class YY extends DB {
       constructor(options) {
@@ -107,7 +106,7 @@ describe('DB', function () {
         done()
       })
   })
-   
+
   it('可以设置多个options插件', function (done) {
     class BB extends DB {
       constructor(options) {
@@ -150,7 +149,7 @@ describe('DB', function () {
       })
   })
 
- 
+
   it('可以通过judge插件判断返回是否正确', function (done) {
     class CC extends DB {
       constructor(options) {
@@ -193,7 +192,7 @@ describe('DB', function () {
         done()
       })
     })
-   
+
 
   it('可以reject数据', function (done) {
     class ZZ extends DB {
