@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Fri Aug 11 2017 22:02:05 GMT+0800 (CST)
+// Generated on Wed Aug 16 2017 22:43:54 GMT+0800 (CST)
 
 module.exports = function(config) {
   config.set({
@@ -27,7 +27,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/*': ['webpack']
     },
 
 
@@ -56,22 +55,12 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
-
-    webpack: {
-      resolve: {
-        extensions: ['.js']
-      }
-    },
-
-    webpackMiddleware: {
-      stats: 'errors-only'
-    },
+    browsers: ['Chrome', 'Firefox'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: !!process.env.TRAVIS,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous
