@@ -5,7 +5,7 @@ if (!DB.prototype.request) {
 }
 const assert = require('assert')
 
-describe('DB', function () {
+describe('DB', function () {  
   it('可以设置options', function () {
     const options = {}
     const db = new DB(options)
@@ -183,6 +183,7 @@ describe('DB', function () {
         assert.equal(res.res.msg, 'hello world')
         return cc.request({ type: 1 })
       }).then((res) => {
+        console.log(res)
         throw new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1')
       }, (res) => {
         assert.equal(res.retcode, 1)
