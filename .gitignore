@@ -1,2 +1,5 @@
-node_modules
-.db.js
+node_modules/
+.idea*
+dist/
+coverage
+.coveralls.yml
