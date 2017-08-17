@@ -79,8 +79,6 @@ describe('DB', function () {
         super(options)
         this.plugin('options', (options) => {
           // modify options
-          options.init = true
-          options.url = 'my://hello'
           options.flag = true
           return options
         })
