@@ -1,5 +1,7 @@
 # 作业
 
+[![Build Status](https://travis-ci.org/mayufo/homework2.svg?branch=master)](https://travis-ci.org/mayufo/homework2)
+[![Coverage Status](https://coveralls.io/repos/github/mayufo/homework2/badge.svg?branch=master)](https://coveralls.io/github/mayufo/homework2?branch=master)
 > 8.15更新，更加详尽的测试用例
 
 ### 目的

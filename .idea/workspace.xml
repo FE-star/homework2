@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="dc6ab501-550a-4677-96e1-0e3d19fb6cbc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Readme.md" afterPath="$PROJECT_DIR$/Readme.md" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,7 +17,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.57052183">
+    <splitter split-orientation="horizontal" split-proportion="0.42947814">
       <split-first>
         <leaf>
           <file leaf-file-name="db.js" pinned="false" current-in-tab="false">
@@ -74,8 +75,8 @@
           <file leaf-file-name=".coveralls.yml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/.coveralls.yml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="20" lean-forward="true" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+                <state relative-caret-position="18">
+                  <caret line="1" column="45" lean-forward="true" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
@@ -99,8 +100,8 @@
             <entry file="file://$PROJECT_DIR$/Readme.md">
               <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
                 <state split_layout="FIRST">
-                  <first_editor relative-caret-position="358">
-                    <caret line="58" column="14" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="14" />
+                  <first_editor relative-caret-position="54">
+                    <caret line="3" column="156" lean-forward="false" selection-start-line="3" selection-start-column="156" selection-end-line="3" selection-end-column="156" />
                     <folding />
                   </first_editor>
                   <second_editor />
@@ -129,13 +130,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Readme.md" />
         <option value="$PROJECT_DIR$/lib/db.js" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/.coveralls.yml" />
+        <option value="$PROJECT_DIR$/Readme.md" />
       </list>
     </option>
   </component>
@@ -322,7 +323,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17396000" />
+    <option name="totallyTimeSpent" value="18022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -448,14 +449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.coveralls.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="20" lean-forward="true" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
@@ -464,11 +457,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.coveralls.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="45" lean-forward="true" selection-start-line="1" selection-start-column="45" selection-end-line="1" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="358">
-            <caret line="58" column="14" lean-forward="false" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="14" />
+          <first_editor relative-caret-position="54">
+            <caret line="3" column="156" lean-forward="false" selection-start-line="3" selection-start-column="156" selection-end-line="3" selection-end-column="156" />
             <folding />
           </first_editor>
           <second_editor />
