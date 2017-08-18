@@ -1,7 +1,7 @@
 let DB = require('../lib/db')
 // just for the real answer, please ignore
 if (!DB.prototype.request) {
-  DB = require('../lib/.db')
+  DB = require('../lib/db')
 }
 const assert = require('assert')
 
@@ -28,6 +28,7 @@ describe('DB', function () {
     }
 
     const xx = new XX()
+
     xx.request()
       .then((res) => {
         assert.equal(res.res.msg, 'hello world')
@@ -78,8 +79,10 @@ describe('DB', function () {
       constructor(options) {
         super(options)
         this.plugin('options', (options) => {
+
           // modify options
           options.flag = true
+          console.log('options123',options)
           return options
         })
         this.plugin('endpoint', (options) => {
