@@ -16,7 +16,7 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-
+        //注册插件 endpoint
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
@@ -214,5 +214,5 @@ describe('DB', function () {
       }, () => {
         done()
       })
-  })
+    })
 })
