@@ -19,7 +19,9 @@ describe('DB', function () {
 
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
+            console.log('??')
             setTimeout(() => {
+              console.log('set')
               resolve({ retcode: 0, res: { msg: 'hello world' } })
             }, 0)
           })
