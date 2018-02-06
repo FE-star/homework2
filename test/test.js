@@ -1,8 +1,8 @@
 let DB = require('../lib/db')
 // just for the real answer, please ignore
-if (!DB.prototype.request) {
-  DB = require('../lib/.db')
-}
+// if (!DB.prototype.request) {
+//   DB = require('../lib/.db')
+// }
 const assert = require('assert')
 
 describe('DB', function () {
@@ -183,7 +183,7 @@ describe('DB', function () {
         assert.equal(res.res.msg, 'hello world')
         return cc.request({ type: 1 })
       }).then((res) => {
-        throw new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1')
+        done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
       }, (res) => {
         assert.equal(res.retcode, 1)
         assert.equal(res.msg, 'logout')
@@ -207,7 +207,7 @@ describe('DB', function () {
 
     zz.request()
       .then(() => {
-        throw new Error('should not trigger resolve callback')
+        done(new Error('should not trigger resolve callback'))
       }, () => {
         done()
       })
