@@ -40,6 +40,7 @@ describe('DB', function () {
       constructor(options) {
         super(options)
         this.plugin('endpoint', function (options) {
+
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
