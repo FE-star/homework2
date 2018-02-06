@@ -1,3 +1,4 @@
+[![Build Status](https://www.travis-ci.org/suozhao/homework1.svg?branch=master)](https://www.travis-ci.org/suozhao/homework1)
 # 作业
 
 > 8.15更新，更加详尽的测试用例
