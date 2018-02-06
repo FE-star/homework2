@@ -183,7 +183,9 @@ describe('DB', function () {
         assert.equal(res.res.msg, 'hello world')
         return cc.request({ type: 1 })
       }).then((res) => {
-        throw new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1')
+        // to test asynchronous code with Mocha, we need to add a callback (usually named done)
+        // done accepts an error instance or a falsy value
+        done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
       }, (res) => {
         assert.equal(res.retcode, 1)
         assert.equal(res.msg, 'logout')
