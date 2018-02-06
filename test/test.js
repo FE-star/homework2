@@ -19,9 +19,7 @@ describe('DB', function () {
 
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
-            console.log('??')
             setTimeout(() => {
-              console.log('set')
               resolve({ retcode: 0, res: { msg: 'hello world' } })
             }, 0)
           })
@@ -42,6 +40,7 @@ describe('DB', function () {
       constructor(options) {
         super(options)
         this.plugin('endpoint', function (options) {
+
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
