@@ -1,3 +1,5 @@
+import { log } from 'util';
+
 let DB = require('../lib/db')
 // just for the real answer, please ignore
 if (!DB.prototype.request) {
