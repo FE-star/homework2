@@ -54,9 +54,17 @@ module.exports = function(config) {
     autoWatch: true,
 
 
+    customLaunchers: {
+      ChromeDebugging: {
+        base: 'Chrome',
+        flags: ['--remote-debugging-port=9333']
+      }
+    },
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    // browsers: ['Chrome'],
+    browsers: ['ChromeDebugging'],
 
     webpack: {
       resolve: {
