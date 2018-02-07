@@ -178,16 +178,17 @@ describe('DB', function () {
     }
 
     const cc = new CC
-    cc.request({ type: 0 })
+    cc.request({ type: 0})
       .then((res) => {
-        assert.equal(res.res.msg, 'hello world')
+        done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为0'))
+      }, (e) => {
         return cc.request({ type: 1 })
       }).then((res) => {
-        throw new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1')
-      }, (res) => {
         assert.equal(res.retcode, 1)
         assert.equal(res.msg, 'logout')
         done()
+      }, (res) => {
+        done(new Error('不应该进入错误的回调，应当进入正确的回调，因为retcode为1'))
       })
   })
 
