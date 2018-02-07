@@ -13,6 +13,7 @@
 
 
 ### 参考链接
+- [webpack - Tapable 官方文档](https://webpack.js.org/api/tapable/)
 - [webpack源码分析（一）— Tapable插件架构](https://www.jianshu.com/p/01a606c97d76)
 - [Webpack 源码（一）—— Tapable 和 事件流](https://yq.aliyun.com/jsarticle/19346)
 - [Tapable中文文档](https://www.jianshu.com/p/c71393db6287)
