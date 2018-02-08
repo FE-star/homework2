@@ -3,7 +3,6 @@ let DB = require('../lib/db')
 if (!DB.prototype.request) {
   DB = require('../lib/.db')
 }
-
 const assert = require('assert')
 
 describe('DB', function () {
