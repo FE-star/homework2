@@ -3,6 +3,7 @@ let DB = require('../lib/db')
 if (!DB.prototype.request) {
   DB = require('../lib/.db')
 }
+
 const assert = require('assert')
 
 describe('DB', function () {
@@ -16,7 +17,7 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-
+        console.log(this, 666)
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
