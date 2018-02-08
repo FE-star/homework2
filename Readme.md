@@ -9,3 +9,6 @@
 ### 注意
 
 大家可以选择 tapable@0.2，也可以选择 tapable@1.x，这个看大家个人喜好哈，虽然我用的是0.2
+
+
+[tapable中文文档](https://www.jianshu.com/p/c71393db6287)
