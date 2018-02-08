@@ -15,8 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/**.js',
-      'node_modules/should/should.js'
+      'test/**.js'
     ],
 
 
@@ -55,9 +54,11 @@ module.exports = function(config) {
     autoWatch: true,
 
 
+    browserNoActivityTimeout: 100000,
+
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'FireFox'],
+    browsers: ['Chrome'],
 
     webpack: {
       resolve: {
