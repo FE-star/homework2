@@ -1,7 +1,7 @@
 let DB = require('../lib/db')
 // just for the real answer, please ignore
 if (!DB.prototype.request) {
-  DB = require('../lib/.db')
+  // DB = require('../lib/.db')
 }
 const assert = require('assert')
 
@@ -67,7 +67,8 @@ describe('DB', function () {
         assert.equal(res.retcode, 1)
         // 如果 options.type === 0，则返回第二个答案
         return aa.request({ type: 0 })
-      }).then(res => {
+      })
+      .then(res => {
         assert.equal(res.retcode, 0)
         done()
       })
@@ -118,7 +119,7 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
         this.plugin('options', (options) => {
           options.url = 'you://hello'
@@ -183,7 +184,7 @@ describe('DB', function () {
         assert.equal(res.res.msg, 'hello world')
         return cc.request({ type: 1 })
       }).then((res) => {
-        throw new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1')
+        done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
       }, (res) => {
         assert.equal(res.retcode, 1)
         assert.equal(res.msg, 'logout')
