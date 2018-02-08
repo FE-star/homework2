@@ -2,7 +2,7 @@
 // Generated on Fri Aug 11 2017 22:02:05 GMT+0800 (CST)
 
 module.exports = function(config) {
-  config.set({
+  var cfg = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -82,5 +82,11 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
+  };
+
+  if (process.env.TRAVIS) {
+    cfg.browsers = ['ChromeHeadlessNoSandbox'];
+  }
+
+  config.set(cfg);
 }
