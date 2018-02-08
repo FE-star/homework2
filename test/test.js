@@ -16,7 +16,7 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-
+        console.log(this, 666)
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
