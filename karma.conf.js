@@ -20,8 +20,7 @@ module.exports = function(config) {
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
@@ -56,7 +55,14 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
+    // you can define custom flags
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
 
     webpack: {
       resolve: {
@@ -71,7 +77,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: !!process.env.TRAVIS,
+    singleRun: true, //!!process.env.TRAVIS,
 
     // Concurrency level
     // how many browser should be started simultaneous
