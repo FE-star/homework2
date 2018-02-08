@@ -67,7 +67,8 @@ describe('DB', function () {
         assert.equal(res.retcode, 1)
         // 如果 options.type === 0，则返回第二个答案
         return aa.request({ type: 0 })
-      }).then(res => {
+      })
+      .then(res => {
         assert.equal(res.retcode, 0)
         done()
       })
@@ -118,7 +119,7 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
         this.plugin('options', (options) => {
           options.url = 'you://hello'
