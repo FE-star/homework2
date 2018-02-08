@@ -1,8 +1,8 @@
 let DB = require('../lib/db')
 // just for the real answer, please ignore
-if (!DB.prototype.request) {
-  DB = require('../lib/.db')
-}
+// if (!DB.prototype.request) {
+//   DB = require('../lib/.db')
+// }
 const assert = require('assert')
 
 describe('DB', function () {
@@ -208,7 +208,7 @@ describe('DB', function () {
 
     zz.request()
       .then(() => {
-        throw new Error('should not trigger resolve callback')
+        done(new Error('should not trigger resolve callback'))
       }, () => {
         done()
       })
