@@ -9,7 +9,7 @@ describe('DB', function () {
   it('可以设置options', function () {
     const options = {}
     const db = new DB(options)
-    assert.equal(db.options, options)
+    assert.equal(db.options, options) 
   })
 
   it('可以设置endpoint插件，使得该请求用制定的方式处理', function (done) {
@@ -27,7 +27,7 @@ describe('DB', function () {
       }
     }
 
-    const xx = new XX()
+    const xx = new XX();
     xx.request()
       .then((res) => {
         assert.equal(res.res.msg, 'hello world')
@@ -191,7 +191,7 @@ describe('DB', function () {
       })
   })
 
-  it('可以reject数据', function (done) {
+   it('可以reject数据', function (done) {
     class ZZ extends DB {
       constructor(options) {
         super(options)
