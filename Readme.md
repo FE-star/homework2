@@ -1,5 +1,7 @@
 # 作业
 
+[![Build Status](https://travis-ci.org/Wortheme/homework2.svg?branch=master)](https://travis-ci.org/Wortheme/homework2)
+
 > 8.15更新，更加详尽的测试用例
 
 ### 目的
