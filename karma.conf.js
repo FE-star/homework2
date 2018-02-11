@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Fri Aug 11 2017 22:02:05 GMT+0800 (CST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -12,10 +12,16 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha'],
 
+    plugins: [
+      'karma-mocha',
+      'karma-chrome-launcher',
+      'karma-webpack'
+    ],
+
 
     // list of files / patterns to load in the browser
     files: [
-      'test/**.js'
+      'test/*.js'
     ],
 
 
@@ -56,7 +62,15 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
+
+    // you can define custom flags
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
 
     webpack: {
       resolve: {
