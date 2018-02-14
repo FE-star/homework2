@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/wknhsj/homework2.svg?branch=master)](https://travis-ci.org/wknhsj/homework2)
 # 作业
 
 > 8.15更新，更加详尽的测试用例
