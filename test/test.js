@@ -16,7 +16,7 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-
+        //  设置endpoint方法和回调函数
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
@@ -39,6 +39,7 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
+        //  设置endpoint方法和回调函数
         this.plugin('endpoint', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
@@ -48,6 +49,7 @@ describe('DB', function () {
             })
           }
         })
+        //  设置endpoint方法和回调函数
         this.plugin('endpoint', function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
@@ -77,11 +79,14 @@ describe('DB', function () {
     class YY extends DB {
       constructor(options) {
         super(options)
+        //  设置插件options方法，说明能进入构造函数的合并属性方法
         this.plugin('options', (options) => {
           // modify options
           options.flag = true
           return options
-        })
+        });
+        //  调用插件endpoint方法
+        //  options返回值
         this.plugin('endpoint', (options) => {
           // init
           assert.equal(options.init, true)
@@ -102,6 +107,7 @@ describe('DB', function () {
     const yy = new YY({ init: true })
     yy.request({ url: 'my://hello' })
       .then((res) => {
+        //  执行回调
         done()
       })
   })
@@ -118,7 +124,7 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
         this.plugin('options', (options) => {
           options.url = 'you://hello'
@@ -142,6 +148,7 @@ describe('DB', function () {
     }
 
     const bb = new BB({ init: true })
+    //  这里调用request方法的时候也给options属性修改了
     bb.request({ url: 'my://hello' })
       .then((res) => {
         done()
