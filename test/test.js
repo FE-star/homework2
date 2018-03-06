@@ -16,7 +16,7 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-        //  重写endpoint方法
+        //  设置endpoint方法和回调函数
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
@@ -39,7 +39,7 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
-        //  这里重写了两次？还是
+        //  设置endpoint方法和回调函数
         this.plugin('endpoint', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
@@ -49,7 +49,7 @@ describe('DB', function () {
             })
           }
         })
-        //  这里重写了两次？还是
+        //  设置endpoint方法和回调函数
         this.plugin('endpoint', function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
@@ -79,12 +79,14 @@ describe('DB', function () {
     class YY extends DB {
       constructor(options) {
         super(options)
-        //  这里设置了options方法，说明能进入构造函数的合并属性方法
+        //  设置插件options方法，说明能进入构造函数的合并属性方法
         this.plugin('options', (options) => {
           // modify options
           options.flag = true
           return options
-        })
+        });
+        //  调用插件endpoint方法
+        //  options返回值
         this.plugin('endpoint', (options) => {
           // init
           assert.equal(options.init, true)
