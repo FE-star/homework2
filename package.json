@@ -26,5 +26,8 @@
     "karma-webpack": "^2.0.4",
     "mocha": "^3.5.0",
     "webpack": "^3.5.3"
+  },
+  "dependencies": {
+    "tapable": "^0.2.0"
   }
 }

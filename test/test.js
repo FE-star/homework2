@@ -184,7 +184,7 @@ describe('DB', function () {
         return cc.request({ type: 1 })
       }).then((res) => {
         done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
-      }, (res) => {
+      }, (res) => {console.log(res);
         assert.equal(res.retcode, 1)
         assert.equal(res.msg, 'logout')
         done()
