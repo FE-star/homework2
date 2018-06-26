@@ -9,10 +9,10 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
-  - 1
+
+script:
+  - node test/none_zero.js
+  - mocha test/test.js
 
 before_install:
   npm install karma-cli -g 
-
-script:
-  mocha test/test.js
