@@ -1,1 +1,1 @@
-return 1;
+new Error('none-zero')
