@@ -1,9 +1,8 @@
 // Karma configuration
-// Generated on Fri Aug 11 2017 22:02:05 GMT+0800 (CST)
+// Generated on Fri May 25 2018 11:30:27 GMT+0800 (中国标准时间)
 
 module.exports = function(config) {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
@@ -56,14 +55,14 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeDebugging'],
-    customLaunchers: {
-      ChromeDebugging: {
-        base: 'Chrome',
-        flags: [ '--remote-debugging-port=9333' ]
-      }
-    },
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
 
+    customLaunchers: {
+        ChromeHeadlessNoSandbox: {
+            base: 'ChromeHeadless',
+            flags: ['--no-sandbox']
+        }
+    },
     webpack: {
       resolve: {
         extensions: ['.js']
@@ -74,13 +73,13 @@ module.exports = function(config) {
       stats: 'errors-only'
     },
 
-
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: !!process.env.TRAVIS,
 
+
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
+  });
 }

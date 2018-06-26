@@ -8,7 +8,7 @@ const assert = require('assert')
 describe('DB', function () {
   it('可以设置options', function () {
     const options = {}
-    const db = new DB(options);
+    const db = new DB(options)
     assert.equal(db.options, options)
   })
 
