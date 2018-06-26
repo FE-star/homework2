@@ -10,9 +10,11 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
-script:
-  - node test/none_zero.js
-  - mocha test/test.js
+# script:
+#   - node test/none_zero.js
+#   - mocha test/test.js
+
+script: none test/none_zero.js && mocha test/test.js
 
 before_install:
   npm install karma-cli -g 
