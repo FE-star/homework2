@@ -9,7 +9,6 @@ describe('DB', function () {
   it('可以设置options', function () {
     const options = {}
     const db = new DB(options);
-    console.log(db);
     assert.equal(db.options, options)
   })
 
