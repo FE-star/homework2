@@ -14,7 +14,7 @@ before_script:
 #   - node test/none_zero.js
 #   - mocha test/test.js
 
-script: node test/none_zero.js && mocha test/test.js
+script: mocha test/test.js
 
 before_install:
   npm install karma-cli -g 
