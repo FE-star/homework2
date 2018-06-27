@@ -12,12 +12,12 @@ describe('DB', function () {
     assert.equal(db.options, options)
   })
 
-  it('可以设置endpoint插件，使得该请求用制定的方式处理', function (done) {
+  it('可以设置endpoint插件，使得该请求用指定的方式处理', function (done) {
     class XX extends DB {
       constructor(options) {
         super(options)
 
-        this.plugin('endpoint', function () {
+        this.plugin('endpoint', function () { // plugin 方法继承于 Tapable
           return new Promise((resolve) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
@@ -28,6 +28,7 @@ describe('DB', function () {
     }
 
     const xx = new XX()
+
     xx.request()
       .then((res) => {
         assert.equal(res.res.msg, 'hello world')
