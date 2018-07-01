@@ -48,7 +48,7 @@ module.exports = function (config) {
     // browsers: ['Chrome'],
     browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessNoSandbox'],
     customLaunchers: {
-      ChromeHeadlessNoSandbox: {
+      Chrome_travis_ci: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']
       }
