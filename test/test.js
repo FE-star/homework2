@@ -49,6 +49,7 @@ describe('DB', function () {
           }
         })
         this.plugin('endpoint', function (options) {
+          // console.log('0: ' + options.type);
           if (options.type === 0) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -66,6 +67,7 @@ describe('DB', function () {
       .then(res => {
         assert.equal(res.retcode, 1)
         // 如果 options.type === 0，则返回第二个答案
+        // console.log('2: --- ');
         return aa.request({ type: 0 })
       }).then(res => {
         assert.equal(res.retcode, 0)
@@ -172,6 +174,7 @@ describe('DB', function () {
         })
 
         this.plugin('judge', function (res) {
+          // console.log('code: ' + res.retcode);
           if (res.retcode !== 0) return true
         })
       }
@@ -185,9 +188,12 @@ describe('DB', function () {
       }).then((res) => {
         done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
       }, (res) => {
+        // console.log('14: ' + res.retcode);
         assert.equal(res.retcode, 1)
         assert.equal(res.msg, 'logout')
         done()
+      }).catch(err => {
+        console.log(err);
       })
   })
 
