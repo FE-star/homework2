@@ -118,7 +118,7 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
         this.plugin('options', (options) => {
           options.url = 'you://hello'
