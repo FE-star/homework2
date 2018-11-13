@@ -14,6 +14,7 @@
 
 https://juejin.im/post/5be90b84e51d457c1c4df852
 https://webpack.docschina.org/api/tapable/
+https://www.cnblogs.com/QH-Jimmy/p/8036962.html
 
 ```js
 exports.__esModule = true;
