@@ -194,25 +194,25 @@ describe('DB', function () {
       })
   })
 
-  // it('可以reject数据', function (done) {
-  //   class ZZ extends DB {
-  //     constructor(options) {
-  //       super(options)
-  //       this.plugin('endpoint', function () {
-  //         return new Promise((resolve, reject) => {
-  //           reject()
-  //         })
-  //       })
-  //     }
-  //   }
+  it('可以reject数据', function (done) {
+    class ZZ extends DB {
+      constructor(options) {
+        super(options)
+        this.hooks.endpoint.tap('reject', function () {
+          return new Promise((resolve, reject) => {
+            reject()
+          })
+        })
+      }
+    }
 
-  //   const zz = new ZZ
+    const zz = new ZZ
 
-  //   zz.request()
-  //     .then(() => {
-  //       done(new Error('should not trigger resolve callback'))
-  //     }, () => {
-  //       done()
-  //     })
-  // })
+    zz.request()
+      .then(() => {
+        done(new Error('should not trigger resolve callback'))
+      }, () => {
+        done()
+      })
+  })
 })
