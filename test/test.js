@@ -39,6 +39,7 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
+        // note:这里function没有return，适合用applyPluginsBailResult
         this.plugin('endpoint', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
@@ -110,6 +111,7 @@ describe('DB', function () {
     class BB extends DB {
       constructor(options) {
         super(options)
+        // note:这里options function有return，不适合用applyPluginsBailResult，得用applyPluginsWaterfall
         this.plugin('options', (options) => {
           // modify options
           options.flag = true
@@ -118,7 +120,7 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
         this.plugin('options', (options) => {
           options.url = 'you://hello'
