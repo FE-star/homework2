@@ -1,5 +1,6 @@
 # 作业
 
+[![Build Status](https://www.travis-ci.org/fefuns/homework2.svg?branch=master)](https://www.travis-ci.org/fefuns/homework2.svg?branch=master)
 > 8.15更新，更加详尽的测试用例
 
 ### 目的
