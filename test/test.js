@@ -6,11 +6,11 @@ let DB = require('../lib/db')
 const assert = require('assert')
 
 describe('DB', function () {
-  it('可以设置options', function () {
-    const options = {}
-    const db = new DB(options)
-    assert.equal(db.options, options)
-  })
+    it('可以设置options', function () {
+        const options = {}
+        const db = new DB(options)
+        assert.equal(db.options, options)
+    })
 
   it('可以设置endpoint插件，使得该请求用制定的方式处理', function (done) {
     class XX extends DB {
@@ -118,7 +118,7 @@ describe('DB', function () {
         this.plugin('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
         this.plugin('options', (options) => {
           options.url = 'you://hello'
