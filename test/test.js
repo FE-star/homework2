@@ -16,7 +16,6 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-
         this.plugin('endpoint', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
@@ -30,6 +29,7 @@ describe('DB', function () {
     const xx = new XX()
     xx.request()
       .then((res) => {
+        debugger;
         assert.equal(res.res.msg, 'hello world')
         done()
       })
