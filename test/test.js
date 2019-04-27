@@ -1,8 +1,5 @@
-let DB = require('../lib/db')
-// just for the real answer, please ignore
-// if (!DB.prototype.request) {
-//   DB = require('../lib/.db')
-// }
+
+var DB = require('../lib/db')
 const assert = require('assert')
 
 describe('DB', function () {
@@ -16,8 +13,7 @@ describe('DB', function () {
     class XX extends DB {
       constructor(options) {
         super(options)
-
-        this.plugin('endpoint', function () {
+        this.hooks.endpoint.tap('endpoint',function () {
           return new Promise((resolve) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
@@ -39,7 +35,7 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tap('logout',function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -48,7 +44,7 @@ describe('DB', function () {
             })
           }
         })
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tap('endpoint',function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -60,7 +56,7 @@ describe('DB', function () {
       }
     }
 
-    const aa = new AA
+    const aa = new AA()
     // 如果 options.type === 1，则返回第一个答案
     aa.request({ type: 1 })
       .then(res => {
@@ -77,19 +73,18 @@ describe('DB', function () {
     class YY extends DB {
       constructor(options) {
         super(options)
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options',(options) => {
           // modify options
           options.flag = true
           return options
         })
-        this.plugin('endpoint', (options) => {
+        this.hooks.endpoint.tap('endpoint',function(options){
           // init
           assert.equal(options.init, true)
           // merge
           assert.equal(options.url, 'my://hello')
           // options plugin modify
           assert.equal(options.flag, true)
-
           return new Promise((resolve, reject) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
@@ -110,21 +105,21 @@ describe('DB', function () {
     class BB extends DB {
       constructor(options) {
         super(options)
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options',(options) => {
           // modify options
           options.flag = true
           return options
         })
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options',(options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
           return options 
         })
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options',(options) => {
           options.url = 'you://hello'
           return options
         })
-        this.plugin('endpoint', (options) => {
+        this.hooks.endpoint.tapPromise('endpoint',(options) => {
           // init
           assert.equal(options.init, true)
           // merge
@@ -152,7 +147,7 @@ describe('DB', function () {
     class CC extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tap('options',function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -161,7 +156,7 @@ describe('DB', function () {
             })
           }
         })
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tap('endpoint',function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -171,7 +166,7 @@ describe('DB', function () {
           }
         })
 
-        this.plugin('judge', function (res) {
+        this.hooks.judge.tap('judge',function (res) {
           if (res.retcode !== 0) return true
         })
       }
@@ -195,7 +190,7 @@ describe('DB', function () {
     class ZZ extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function () {
+        this.hooks.endpoint.tap('endpoint', function () {
           return new Promise((resolve, reject) => {
             reject()
           })
