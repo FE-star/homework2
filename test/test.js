@@ -82,12 +82,12 @@ describe('DB', function () {
     class YY extends DB {
       constructor(options) {
         super(options)
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('modify options', (options) => {
           // modify options
           options.flag = true
           return options
         })
-        this.plugin('endpoint', (options) => {
+        this.hooks.endpoint.tapPromise('endpoint', (options) => {
           // init
           assert.equal(options.init, true)
           // merge
