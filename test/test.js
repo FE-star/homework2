@@ -199,9 +199,9 @@ describe('DB', function () {
     class ZZ extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function () {
+        this.hooks.endpoint.tapPromise('endpoint', function () {
           return new Promise((resolve, reject) => {
-            reject()
+            reject(new Error('some err'))
           })
         })
       }
