@@ -39,7 +39,7 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tapPromise('1', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -47,8 +47,12 @@ describe('DB', function () {
               }, 0)
             })
           }
+          return Promise.resolve(options);
         })
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tapPromise('0', function (options) {
+          if (options.retcode != null) {
+            return Promise.resolve(options);
+          }
           if (options.type === 0) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -56,6 +60,7 @@ describe('DB', function () {
               }, 0)
             })
           }
+          return Promise.resolve(options);
         })
       }
     }
