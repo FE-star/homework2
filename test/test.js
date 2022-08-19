@@ -115,21 +115,21 @@ describe('DB', function () {
     class BB extends DB {
       constructor(options) {
         super(options)
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options', (options) => {
           // modify options
           options.flag = true
           return options
         })
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options', (options) => {
           options.url = 'you://hello'
           return options
         })
-        this.plugin('endpoint', (options) => {
+        this.hooks.endpoint.tapPromise('endpoint', (options) => {
           // init
           assert.equal(options.init, true)
           // merge
