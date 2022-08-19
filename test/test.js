@@ -17,7 +17,7 @@ describe('DB', function () {
       constructor(options) {
         super(options)
 
-        this.plugin('endpoint', function () {
+        this.hooks.endpoint.tapPromise('format', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
