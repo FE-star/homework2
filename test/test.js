@@ -48,7 +48,7 @@ describe('DB', function () {
               msg = 'logout'
             }
             setTimeout(() => {
-                resolve({retcode: options.type, res: {msg}});
+              resolve({retcode: options.type, res: {msg}});
             }, 0)
           })
         })
