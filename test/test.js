@@ -41,16 +41,16 @@ describe('DB', function () {
         super(options)
         this.plugin('endpoint', function (options) {
           return new Promise(resolve => {
-            let msg = '';
+            let msg = ''
             if (options.type === 0) {
-                msg = 'hello world';
+              msg = 'hello world';
             } else if (options.type === 1) {
-                msg = 'logout';
+              msg = 'logout'
             }
             setTimeout(() => {
                 resolve({retcode: options.type, res: {msg}});
-            }, 0);
-          });
+            }, 0)
+          })
         })
       }
     }
