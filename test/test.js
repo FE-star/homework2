@@ -38,7 +38,16 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
-        this.hooks.endpoint.tapPromise('endpoint', function (options) {
+
+        /* 
+          梳理一下流程：
+          1. 第一次请求时，type为1，会先执行endpoint1，将{ retcode: 1, msg: 'logout' }传递给endpoint2
+          2. endpoint2接收到{ retcode: 1, msg: 'logout' }后，走else逻辑，将其传递给第一次请求的then回调
+          3. 发出第二次请求，type为0，先执行endpoint1，走else逻辑，将{ type: 0 }传递给endpoint2
+          4. endpoint2接收到{ type: 0 }，会将{ retcode: 0, res: { msg: 'hello world' } }传递给第二个then回调
+        */
+
+        this.hooks.endpoint.tapPromise('endpoint1', function (options) {
           if (options.type === 1) {
             return new Promise(resolve => {
               setTimeout(() => {
@@ -46,6 +55,7 @@ describe('DB', function () {
               }, 0)
             })
           } else {
+            // AsyncSeriesWaterfallHook需要将返回值传递给下一个函数
             return new Promise(resolve => {
               setTimeout(() => {
                 resolve(options)
@@ -53,7 +63,8 @@ describe('DB', function () {
             })
           }
         })
-        this.hooks.endpoint.tapPromise('endpoint', function (options) {
+
+        this.hooks.endpoint.tapPromise('endpoint2', function (options) {
           if (options.type === 0) {
             return new Promise(resolve => {
               setTimeout(() => {
@@ -196,6 +207,8 @@ describe('DB', function () {
         })
 
         this.hooks.judge.tap('judge', function (res) {
+          // retcode为0表示请求成功
+          // 如果没有注册judge hook，会将res直接返回
           return res.retcode === 0
         })
       }
