@@ -23,6 +23,6 @@
     "jest": "^28.1.3"
   },
   "dependencies": {
-    "tapable": "^1.1.3"
+    "tapable": "^2.2.1"
   }
 }
