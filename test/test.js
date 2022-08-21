@@ -39,28 +39,22 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function (options) {
-          if (options.type === 1) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 1, msg: 'logout' })
-              }, 0)
-            })
-          }
-        })
-        this.plugin('endpoint', function (options) {
-          if (options.type === 0) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 0, res: { msg: 'hello world' } })
-              }, 0)
-            })
-          }
-        })
-      }
-    }
 
-    const aa = new AA
+        this.plugin('endpoint', (options) => {
+          return new Promise((resolve) => {
+            if (options.type === 1) {
+              setTimeout(() => {
+                resolve({ retcode: 1 });
+              }, 0);
+            }
+            if (options.type === 0) {
+              resolve({ retcode: 0 });
+            }
+          });
+        });
+      }
+    }    
+    const aa = new AA()
     // 如果 options.type === 1，则返回第一个答案
     aa.request({ type: 1 })
       .then(res => {
@@ -153,22 +147,16 @@ describe('DB', function () {
       constructor(options) {
         super(options)
         this.plugin('endpoint', function (options) {
-          if (options.type === 1) {
-            return new Promise((resolve) => {
+          return new Promise((resolve) => {
+            if (options.type === 1) {
               setTimeout(() => {
-                resolve({ retcode: 1, msg: 'logout' })
-              }, 0)
-            })
-          }
-        })
-        this.plugin('endpoint', function (options) {
-          if (options.type === 0) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 0, res: { msg: 'hello world' } })
-              }, 0)
-            })
-          }
+                resolve({ retcode: 1, msg: 'logout' });
+              }, 0);
+            }
+            if (options.type === 0) {
+              resolve({ retcode: 0, res: { msg: 'hello world' } })
+            }
+          });
         })
 
         this.plugin('judge', function (res) {
