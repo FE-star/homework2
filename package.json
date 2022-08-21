@@ -28,6 +28,7 @@
     "webpack": "^3.5.3"
   },
   "dependencies": {
+    "puppeteer": "^16.2.0",
     "tapable": "^1.1.1"
   }
 }
