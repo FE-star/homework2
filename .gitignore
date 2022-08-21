@@ -2,3 +2,4 @@ node_modules
 .db.js
 package-lock.json
 dbback.js
+yarn.lock
