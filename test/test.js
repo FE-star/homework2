@@ -40,22 +40,17 @@ describe('DB', function () {
       constructor(options) {
         super(options)
         this.plugin('endpoint', function (options) {
-          if (options.type === 1) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 1, msg: 'logout' })
-              }, 0)
-            })
-          }
-        })
-        this.plugin('endpoint', function (options) {
-          if (options.type === 0) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 0, res: { msg: 'hello world' } })
-              }, 0)
-            })
-          }
+          return new Promise(resolve => {
+            let msg = ''
+            if (options.type === 0) {
+              msg = 'hello world';
+            } else if (options.type === 1) {
+              msg = 'logout'
+            }
+            setTimeout(() => {
+              resolve({retcode: options.type, res: {msg}});
+            }, 0)
+          })
         })
       }
     }
@@ -153,22 +148,17 @@ describe('DB', function () {
       constructor(options) {
         super(options)
         this.plugin('endpoint', function (options) {
-          if (options.type === 1) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 1, msg: 'logout' })
-              }, 0)
-            })
-          }
-        })
-        this.plugin('endpoint', function (options) {
-          if (options.type === 0) {
-            return new Promise((resolve) => {
-              setTimeout(() => {
-                resolve({ retcode: 0, res: { msg: 'hello world' } })
-              }, 0)
-            })
-          }
+          return new Promise(resolve => {
+            let msg = ''
+            if (options.type === 0) {
+              msg = 'hello world'
+            } else if (options.type === 1) {
+              msg = 'logout'
+            }
+            setTimeout(() => {
+              resolve({retcode: options.type, res: {msg}});
+            }, 0)
+          })
         })
 
         this.plugin('judge', function (res) {
@@ -178,17 +168,18 @@ describe('DB', function () {
     }
 
     const cc = new CC
-    cc.request({ type: 0 })
-      .then((res) => {
-        assert.equal(res.res.msg, 'hello world')
-        return cc.request({ type: 1 })
-      }).then((res) => {
-        done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
-      }, (res) => {
-        assert.equal(res.retcode, 1)
-        assert.equal(res.msg, 'logout')
+    cc.request({type: 0})
+        .then((res) => {
+          assert.strictEqual(res.res.msg, 'hello world')
+          return cc.request({type: 1})
+        })
+        .then((res) => {
+          done(new Error('不应该进入正确回调，应当进入失败回调，因为retcode为1'))
+        }, (res) => {
+        assert.strictEqual(res.retcode, 1)
+        assert.strictEqual(res.res.msg, 'logout')
         done()
-      })
+    })
   })
 
   it('可以reject数据', function (done) {
