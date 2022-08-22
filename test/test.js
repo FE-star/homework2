@@ -17,7 +17,7 @@ describe('DB', function () {
       constructor(options) {
         super(options)
 
-        this.plugin('endpoint', function () {
+        this.hooks.endpoint.tapPromise('format', function () {
           return new Promise((resolve) => {
             setTimeout(() => {
               resolve({ retcode: 0, res: { msg: 'hello world' } })
@@ -39,7 +39,7 @@ describe('DB', function () {
     class AA extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tapPromise('1', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -47,8 +47,9 @@ describe('DB', function () {
               }, 0)
             })
           }
+          return Promise.resolve();
         })
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tapPromise('0', function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -56,6 +57,7 @@ describe('DB', function () {
               }, 0)
             })
           }
+          return Promise.resolve();
         })
       }
     }
@@ -77,12 +79,12 @@ describe('DB', function () {
     class YY extends DB {
       constructor(options) {
         super(options)
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('modify options', (options) => {
           // modify options
           options.flag = true
           return options
         })
-        this.plugin('endpoint', (options) => {
+        this.hooks.endpoint.tapPromise('endpoint', (options) => {
           // init
           assert.equal(options.init, true)
           // merge
@@ -110,21 +112,21 @@ describe('DB', function () {
     class BB extends DB {
       constructor(options) {
         super(options)
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options', (options) => {
           // modify options
           options.flag = true
           return options
         })
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options', (options) => {
           // modify options，后面的覆盖前面的
           options.flag = false
-          return options 
+          return options
         })
-        this.plugin('options', (options) => {
+        this.hooks.options.tap('options', (options) => {
           options.url = 'you://hello'
           return options
         })
-        this.plugin('endpoint', (options) => {
+        this.hooks.endpoint.tapPromise('endpoint', (options) => {
           // init
           assert.equal(options.init, true)
           // merge
@@ -152,7 +154,7 @@ describe('DB', function () {
     class CC extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tapPromise('1', function (options) {
           if (options.type === 1) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -160,8 +162,9 @@ describe('DB', function () {
               }, 0)
             })
           }
+          return Promise.resolve()
         })
-        this.plugin('endpoint', function (options) {
+        this.hooks.endpoint.tapPromise('0', function (options) {
           if (options.type === 0) {
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -169,9 +172,10 @@ describe('DB', function () {
               }, 0)
             })
           }
+          return Promise.resolve()
         })
 
-        this.plugin('judge', function (res) {
+        this.hooks.judge.tap('judge', function (res) {
           if (res.retcode !== 0) return true
         })
       }
@@ -195,9 +199,9 @@ describe('DB', function () {
     class ZZ extends DB {
       constructor(options) {
         super(options)
-        this.plugin('endpoint', function () {
+        this.hooks.endpoint.tapPromise('endpoint', function () {
           return new Promise((resolve, reject) => {
-            reject()
+            reject(new Error('some err'))
           })
         })
       }
